@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'feature', url: 'https://github.com/tu-usuario/tu-repo.git'
+                git branch: 'rama-cambio-trivial', url: 'https://github.com/EderSaiz/react-redux-eder'
             }
         }
 
