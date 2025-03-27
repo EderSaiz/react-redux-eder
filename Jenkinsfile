@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:18' }
+    }
 
     stages {
         stage('Checkout') {
@@ -21,13 +23,13 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            echo 'Build y pruebas exitosas'
-        }
-        failure {
-            echo 'Ha habido algun error'
-        }
+    post { 
+    	success { 
+    		echo 'Build y pruebas exitosas'
+	} 
+	failure { 
+		echo 'Ha habido algun error' 
+	}
     }
 }
 
