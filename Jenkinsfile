@@ -1,12 +1,10 @@
 pipeline {
-    agent {
-        docker { image 'node:18' }
-    }
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'rama-cambio-trivial', url: 'https://github.com/EderSaiz/react-redux-eder'
+                git branch: 'feature', url: 'https://github.com/tu-usuario/tu-repo.git'
             }
         }
 
@@ -23,13 +21,12 @@ pipeline {
         }
     }
 
-    post { 
-    	success { 
-    		echo 'Build y pruebas exitosas'
-	} 
-	failure { 
-		echo 'Ha habido algun error' 
-	}
+    post {
+        success {
+            echo 'Build y pruebas exitosas'
+        }
+        failure {
+            echo 'Algo falló'
+        }
     }
 }
-
