@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'rama-cambio-trivial', url: 'https://github.com/EderSaiz/react-redux-eder'
+               git branch: 'rama-cambio-trivial', url: 'https://github.com/EderSaiz/react-redux-eder'
             }
         }
 
         stage('Build') {
             steps {
-                sh 'npm install --force'
+                sh 'npm instal --forcel'
             }
         }
 
@@ -19,14 +19,22 @@ pipeline {
                 sh 'npm test'
             }
         }
+
+        stage('Deploy') {
+            steps {
+                sh 'docker build -t mi-app .'
+                sh 'docker run -d -p 3000:3000 mi-app'
+            }
+        }
     }
 
     post {
         success {
-            echo 'Build y pruebas exitosas'
+            echo '¡Despliegue exitoso!'
         }
         failure {
-            echo 'Algo falló'
+            echo 'El despliegue falló'
         }
     }
 }
+
