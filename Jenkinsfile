@@ -6,12 +6,10 @@ pipeline {
                 script {
                     def timestamp = new Date().format("yyyyMMdd_HHmmss")
                     def filename = "versiones_${timestamp}.txt"
-                    sh """
-                        echo "==== Java Version ====" > ${filename}
-                        java -version 2>&1 | tee -a ${filename}
-                        echo "\\n==== Jenkins Version ====" >> ${filename}
-                        java -jar /usr/share/jenkins/jenkins.war >> ${filename}
-                    """
+                    sh "echo "==== Java Version ====" > ${filename}"
+                    sh "java -version >> ${filename}"
+                    sh "echo "==== Jenkins Version ====" >> ${filename}"
+                    sh "java -jar /usr/share/jenkins/jenkins.war >> ${filename}"
                 }
             }
         }
