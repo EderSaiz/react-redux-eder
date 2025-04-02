@@ -10,12 +10,11 @@ pipeline {
                         echo "==== Java Version ====" > ${filename}
                         java -version 2>&1 | tee -a ${filename}
                         echo "\\n==== Jenkins Version ====" >> ${filename}
-                        java -jar /usr/share/jenkins/jenkins.war >> ${filename}" >> ${filename}
+                        java -jar /usr/share/jenkins/jenkins.war >> ${filename}
                     """
                 }
             }
         }
     }
 }
-
 
