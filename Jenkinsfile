@@ -9,7 +9,7 @@ pipeline {
                     sh """echo "==== Java Version ====" > ${filename}"""
                     sh "java -version >> ${filename}"
                     sh """echo "==== Jenkins Version ====" >> ${filename}"""
-                    sh "java -jar /usr/share/jenkins/jenkins.war >> ${filename}"
+                    sh "java -jar /usr/share/jenkins/jenkins.war --version >> ${filename}"
                 }
             }
         }
