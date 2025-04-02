@@ -6,6 +6,7 @@ pipeline {
 		script {
 		    def timestamp = new Date().format("yyyyMMdd_HHmmss")
 		    def filename = "puertos_${timestamp}.txt"
+		    sh """echo "==== Puertos abiertos en el contenedor ====" > ${filename}"""
 		    sh "nmap -p- 127.0.0.1 > ${filename}"
 		}
 	    }
