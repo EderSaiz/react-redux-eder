@@ -7,7 +7,7 @@ pipeline {
                     def timestamp = new Date().format("yyyyMMdd_HHmmss")
                     def filename = "versiones_${timestamp}.txt"
                     sh "java -version > ${filename} 2>&1"
-                    sh "jenkins --version >> ${filename}"
+                    sh "java -jar /usr/share/jenkins/jenkins.war --version >> ${filename}"
                 }
             }
         }
