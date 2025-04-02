@@ -1,39 +1,15 @@
 pipeline {
     agent any
-
     stages {
-        stage('Checkout') {
+        stage('Obtener Versiones') {
             steps {
-               git branch: 'rama-cambio-trivial', url: 'https://github.com/EderSaiz/react-redux-eder'
+                script {
+                    def timestamp = new Date().format("yyyyMMdd_HHmmss")
+                    def filename = "versiones_${timestamp}.txt"
+                    sh "java -version > ${filename} 2>&1"
+                    sh "jenkins --version >> ${filename}"
+                }
             }
-        }
-
-        stage('Build') {
-            steps {
-                sh 'npm instal --forcel'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                sh 'npm test'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                sh 'docker build -t mi-app .'
-                sh 'docker run -d -p 3000:3000 mi-app'
-            }
-        }
-    }
-
-    post {
-        success {
-            echo '¡Despliegue exitoso!'
-        }
-        failure {
-            echo 'El despliegue falló'
         }
     }
 }
