@@ -1,14 +1,12 @@
 pipeline {
     agent any
     stages {
-        stage('Escaneo de Puertos') {
+        stage('Comparación de Estados') {
 	    steps {
 		script {
-		    def timestamp = new Date().format("yyyyMMdd_HHmmss")
-		    def filename = "hashes_${timestamp}.txt"
-		    sh """echo "==== Hashes de los dos ficheros anteriores ====" > ${filename}"""
-		    sh "find /var/jenkins_home/workspace/Feature-CI-Pipeline/versiones_20250402_103217.txt -type f -exec sha256sum {} + >> ${filename}"
-		    sh "find /var/jenkins_home/workspace/Feature-CI-Pipeline/puertos_20250402_105418.txt -type f -exec sha256sum {} + >> ${filename}"
+		    sh "diff versiones_20250402_103217.txt versiones_actuales.txt > diferencias_versiones.txt || true"
+		    sh "diff puertos_20250402_105418.txt puertos_actuales.txt > diferencias_puertos.txt || true"
+		    sh "diff hashes_20250402_110639.txt hashes_actuales.txt > diferencias_hashes.txt || true"
 		}
 	    }
 	}
